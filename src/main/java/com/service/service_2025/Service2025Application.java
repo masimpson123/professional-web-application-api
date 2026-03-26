@@ -1,5 +1,6 @@
 package com.service.service_2025;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
@@ -91,6 +92,9 @@ public String advancedUsage(@RequestHeader(value = "Authorization", required = f
 		}
 	}
 
+	@Value("${gemini.api.key}")
+	private String geminiKey;
+
 	@PostMapping("/ai")
 	public String query(@RequestBody AIQuery requestBody) throws IOException, InterruptedException {
 		String response = "no data";
@@ -100,7 +104,7 @@ public String advancedUsage(@RequestHeader(value = "Authorization", required = f
 					.uri(URI.create(apiUrl))
 					.header("Content-Type", "application/json")
 					// the below key must remain hidden
-					.header("X-goog-api-key", "")
+					.header("X-goog-api-key", this.geminiKey)
 					.POST(HttpRequest.BodyPublishers.ofString(requestBody.getQuery()))
 					.build();
 			response = client.send(request, HttpResponse.BodyHandlers.ofString()).body();

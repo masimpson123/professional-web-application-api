@@ -4,11 +4,13 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+import org.springframework.messaging.handler.annotation.DestinationVariable;
 import org.springframework.messaging.handler.annotation.MessageMapping;
-import org.springframework.messaging.handler.annotation.SendTo;
 
+import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.socket.config.annotation.EnableWebSocketMessageBroker;
+import org.springframework.messaging.simp.config.MessageBrokerRegistry;
 import org.springframework.web.socket.config.annotation.StompEndpointRegistry;
 import org.springframework.web.socket.config.annotation.WebSocketMessageBrokerConfigurer;
 import org.springframework.web.servlet.mvc.method.annotation.StreamingResponseBody;
@@ -29,6 +31,7 @@ import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.util.*;
 import java.util.concurrent.CompletableFuture;
 
@@ -175,10 +178,15 @@ public String advancedUsage(@RequestHeader(value = "Authorization", required = f
 		}
 	}
 
-	@MessageMapping("/websocket-input")
-	@SendTo("/websocket-output")
-	public String websocket(String message) {
-		return LocalTime.now() + ": " + message;
+	@MessageMapping("/{roomId}")
+	@SendTo("/sub/{roomId}")
+	public String roomMessage(@DestinationVariable String roomId, String message) {
+		return roomId + " | " + LocalTime.now().format(DateTimeFormatter.ofPattern("HH:mm:ss")) + " | " + message;
+	}
+
+	@Override
+	public void configureMessageBroker(MessageBrokerRegistry registry) {
+		registry.setApplicationDestinationPrefixes("/pub");
 	}
 
 	@Override

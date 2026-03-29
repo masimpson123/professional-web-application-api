@@ -14,7 +14,7 @@ Create the image ..................... /Users/michaelsimpson/Desktop/service-202
 Run the image ........................ ensure host port and container port are both 8080
 Upload it to GCP Artifact registry ... docker tag service2025 us-central1-docker.pkg.dev/endpoint-one/endpoint-one/service2025:<mmddyy>
                                    ... docker push us-central1-docker.pkg.dev/endpoint-one/endpoint-one/service2025:<mmddyy>
-Update image in cloud run ............ gcloud run services update endpoint-one-2 --region us-central1 --platform managed --image us-central1-docker.pkg.dev/endpoint-one/endpoint-one/client2026:<mmddyy>
+Update image in cloud run ............ gcloud run services update endpoint-one-2 --region us-central1 --platform managed --image us-central1-docker.pkg.dev/endpoint-one/endpoint-one/service2025:<mmddyy>
 
 Sign into google cloud ............... gcloud auth login
 Sign out of google cloud ............. gcloud auth revoke

@@ -3,7 +3,7 @@ package com.service.service_2025;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
-@SpringBootTest
+@SpringBootTest(properties = {"gemini.api.key=123"})
 class Service2025ApplicationTests {
 
 	@Test

@@ -102,7 +102,7 @@ public String advancedUsage(@RequestHeader(value = "Authorization", required = f
 	public String query(@RequestBody AIQuery requestBody) throws IOException, InterruptedException {
 		String response = "no data";
 		try(HttpClient client = HttpClient.newHttpClient()) {
-			String apiUrl = "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent";
+			String apiUrl = "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.6-flash:generateContent";
 			HttpRequest request = HttpRequest.newBuilder()
 					.uri(URI.create(apiUrl))
 					.header("Content-Type", "application/json")

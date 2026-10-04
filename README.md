@@ -47,6 +47,11 @@ In Claude Code, run `/deploy-to-gcp`. It deploys the local working tree without 
    ```bash
    gcloud run services update endpoint-one-2 --region us-central1 --platform managed --image us-central1-docker.pkg.dev/endpoint-one/endpoint-one/service2025:<mmddyy>
    ```
+4. Update environment variables (if needed):
+
+   ```bash
+    gcloud run services update endpoint-one-2 --project endpoint-one --region us-central1 --update-env-vars="GEMINI_KEY=x,ZOOM_SDK_KEY=x,ZOOM_SDK_SECRET=x"
+    ```
 
 ### Google Cloud sign-in
 

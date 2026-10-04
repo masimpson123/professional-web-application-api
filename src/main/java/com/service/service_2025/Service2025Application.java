@@ -189,11 +189,12 @@ public String advancedUsage(@RequestHeader(value = "Authorization", required = f
 		registry.setApplicationDestinationPrefixes("/pub");
 	}
 
+	@Value("${websocket.allowed-origins}")
+	private String[] websocketAllowedOrigins;
+
 	@Override
 	public void registerStompEndpoints(StompEndpointRegistry registry) {
-		registry.addEndpoint("/websocket-broker")
-				// .setAllowedOrigins("http://localhost:4200");
-				.setAllowedOrigins("https://msio-u7qjhl7iia-uc.a.run.app");
+		registry.addEndpoint("/websocket-broker").setAllowedOrigins(websocketAllowedOrigins);
 	}
 
 	private void connectToFirebase() throws Exception {

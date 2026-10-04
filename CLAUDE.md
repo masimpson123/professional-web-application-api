@@ -45,7 +45,7 @@ All REST endpoints allow any origin (`@CrossOrigin`).
 | `GET /request-advanced-usage-claim` | Sets the `advanced-usage` claim on the authenticated user |
 | `POST /ai` | Forwards the request body's `query` to Gemini (`gemini-3.6-flash`) and returns `{"response": ...}` |
 | `GET /search/{searchTerm}` | Concurrent search across places, items, and books, streamed as each finishes |
-| `GET /zoom-token` | Signs a Zoom Video SDK JWT for the shared `msio-video` session |
+| `GET /zoom-token?session=&role=&userKey=` | Signs a Zoom Video SDK JWT for one session room (`cs-…`); `role` is `host` or `participant` |
 
 The Firebase endpoints return `{"response": ...}` on success and `{"error": ...}` on failure, both with HTTP 200.
 
